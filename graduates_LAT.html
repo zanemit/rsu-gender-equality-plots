@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="utils/plot-utils.js"></script>
+  <link rel="stylesheet" href="utils/plot-styles.css">
+</head>
+
+<body>
+  <div class="panel-container">
+    <!-- Navigation arrows -->
+    <!-- <div id="prevBtn" class="nav-button">←</div>
+    <div id="nextBtn" class="nav-button">→</div> -->
+
+    <!-- Pane 1 -->
+    <div id="pane3" class="chart-pane active" style="font-family: Arial, sans-serif;">
+      <label for="dataSelect3">Izvēlieties datus, ko attēlot:</label>
+      <select id="dataSelect3">
+        <option value="all">Visa universitāte</option>
+      </select>
+      <div id="plot-container3" style="width:100%;height:500px;"></div>
+    </div>
+
+  <script>
+    const graduatesByGroup = {
+        all: { x: [2022, 2023, 2024], y: [76, 78, 77], total: [1391, 1555, 1452], name: "Visa universitāte" }
+    };
+
+    const labelMapping = {
+            all: "visu absolventu",
+        };
+
+     document.addEventListener("DOMContentLoaded", () => {
+            makeLinePlot("plot-container3", graduatesByGroup, "all", labelMapping, 'absolventi', 'Absolventu %');
+
+            document.getElementById("dataSelect3").addEventListener("change", e => {
+                makeLinePlot("plot-container3", graduatesByGroup, e.target.value, labelMapping, 'absolventi', 'Absolventu %');
+            });
+        });
+    </script>
+</body> 
+</html>
