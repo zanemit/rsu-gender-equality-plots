@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="utils/plot-utils.js"></script>
+  <script src="utils/data.js"></script>
+  <link rel="stylesheet" href="utils/plot-styles.css">
+</head>
+
+<body>
+  <div class="panel-container">
+    <!-- Navigation arrows -->
+    <!-- <div id="prevBtn" class="nav-button">←</div>
+    <div id="nextBtn" class="nav-button">→</div> -->
+
+    <!-- Pane 5 -->
+    <div id="pane5" class="chart-pane active" style="font-family: Arial, sans-serif;">
+      <label for="dataSelect5">Izvēlies datus, ko attēlot:</label>
+      <select id="dataSelect5"></select>
+      <div id="plot-container5" style="width:100%;height:500px;"></div>
+    </div>
+
+  <script>
+    const LANG = "en";
+
+    document.addEventListener("DOMContentLoaded", () => {
+            const relevantLabels = subsetLabelsByData(
+              payByGroup,
+              LABELS[LANG].groupNames
+                );
+
+            populateSelect("dataSelect5", relevantLabels, "managers");
+
+            makeBarPlot(
+                    "plot-container5", 
+                    payByGroup, 
+                    "managers", 
+                    {
+                        ...TEXTS[LANG]
+                    }
+                  );
+
+            document.getElementById("dataSelect5").addEventListener("change", e => {
+                makeBarPlot(
+                  "plot-container5", 
+                  payByGroup, 
+                  e.target.value, 
+                  {
+                      ...TEXTS[LANG]
+                  }
+                );
+            });
+        });
+  </script>
+</body>

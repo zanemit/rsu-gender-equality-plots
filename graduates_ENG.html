@@ -22,7 +22,7 @@
     </div>
 
   <script>
-    const LANG = "lv";
+    const LANG = "en";
 
      document.addEventListener("DOMContentLoaded", () => {
             const relevantLabels = subsetLabelsByData(
@@ -39,8 +39,8 @@
                       LABELS[LANG].groupNamesPossessive, 
                       {
                         ...TEXTS[LANG],
-                        hoverUnit: 'absolventi', 
-                        yAxisTitle: 'Absolventu %'
+                        hoverUnit: 'graduates', 
+                        yAxisTitle: '% of graduates'
                       });
 
             document.getElementById("dataSelect3").addEventListener("change", e => {
@@ -51,8 +51,8 @@
                       LABELS[LANG].groupNamesPossessive, 
                       {
                         ...TEXTS[LANG],
-                        hoverUnit: 'absolventi', 
-                        yAxisTitle: 'Absolventu %'  
+                        hoverUnit: 'graduates', 
+                        yAxisTitle: '% of graduates'  
                       });
             });
         });

@@ -15,43 +15,44 @@
     <div id="nextBtn" class="nav-button">→</div> -->
 
     <!-- Pane 1 -->
-    <div id="pane4" class="chart-pane active" style="font-family: Arial, sans-serif;">
-      <label for="dataSelect4">Izvēlieties datus, ko attēlot:</label>
-      <select id="dataSelect4"> </select>
-      <div id="plot-container4" style="width:100%;height:500px;"></div>
+    <div id="pane2" class="chart-pane active" style="font-family: Arial, sans-serif;">
+      <label for="dataSelect2">Izvēlieties datus, ko attēlot:</label>
+      <select id="dataSelect2"></select>
+      <div id="plot-container2" style="width:100%;height:500px;"></div>
     </div>
 
   <script>
     const LANG = "lv";
+
     document.addEventListener("DOMContentLoaded", () => {
             const relevantLabels = subsetLabelsByData(
-              employeesByGroup,
+              studentsByGroup,
               LABELS[LANG].groupNames
                 );
 
-            populateSelect("dataSelect4", relevantLabels, "all_staff");
+            populateSelect("dataSelect2", relevantLabels, "all_students");
 
             makeLinePlot(
-                    "plot-container4", 
-                    employeesByGroup, 
-                    "all_staff", 
-                    LABELS[LANG].groupNamesPossessive, 
-                    {
+                      "plot-container2", 
+                      studentsByGroup, 
+                      "all_students", 
+                      LABELS[LANG].groupNamesPossessive, 
+                      {
                         ...TEXTS[LANG],
-                        hoverUnit: 'darbinieki', 
-                        yAxisTitle: 'Darbinieku %'
-                    });
+                        hoverUnit: 'jaunuzņemtie studenti', 
+                        yAxisTitle: 'Jaunuzņemto studentu %'
+                      });
 
-            document.getElementById("dataSelect4").addEventListener("change", e => {
+            document.getElementById("dataSelect2").addEventListener("change", e => {
                 makeLinePlot(
-                        "plot-container4", 
-                        employeesByGroup, 
+                        "plot-container2", 
+                        studentsByGroup, 
                         e.target.value, 
                         LABELS[LANG].groupNamesPossessive, 
                         {
                           ...TEXTS[LANG],
-                          hoverUnit: 'darbinieki', 
-                          yAxisTitle: 'Darbinieku %'
+                        hoverUnit: 'jaunuzņemtie studenti', 
+                        yAxisTitle: 'Jaunuzņemto studentu %'
                         });
             });
         });
