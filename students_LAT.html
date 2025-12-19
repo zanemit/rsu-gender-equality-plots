@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="utils/plot-utils.js"></script>
+  <script src="utils/data.js"></script>
+  <link rel="stylesheet" href="utils/plot-styles.css">
+</head>
+
+<body>
+  <div class="panel-container">
+    <!-- Navigation arrows -->
+    <!-- <div id="prevBtn" class="nav-button">←</div>
+    <div id="nextBtn" class="nav-button">→</div> -->
+
+    <!-- Pane 1 -->
+    <div id="pane2" class="chart-pane active" style="font-family: Arial, sans-serif;">
+      <label for="dataSelect2">Izvēlieties datus, ko attēlot:</label>
+      <select id="dataSelect2"></select>
+      <div id="plot-container2" style="width:100%;height:500px;"></div>
+    </div>
+
+  <script>
+    const LANG = "lv";
+
+    document.addEventListener("DOMContentLoaded", () => {
+            const relevantLabels = subsetLabelsByData(
+              studentsByGroup,
+              LABELS[LANG].groupNames
+                );
+
+            populateSelect("dataSelect2", relevantLabels, "all_students");
+
+            makeLinePlot(
+                      "plot-container2", 
+                      studentsByGroup, 
+                      "all_students", 
+                      LABELS[LANG].groupNamesPossessive, 
+                      {
+                        ...TEXTS[LANG],
+                        hoverUnit: 'jaunuzņemtie studenti', 
+                        yAxisTitle: 'Jaunuzņemto studentu %'
+                      });
+
+            document.getElementById("dataSelect2").addEventListener("change", e => {
+                makeLinePlot(
+                        "plot-container2", 
+                        studentsByGroup, 
+                        e.target.value, 
+                        LABELS[LANG].groupNamesPossessive, 
+                        {
+                          ...TEXTS[LANG],
+                        hoverUnit: 'jaunuzņemtie studenti', 
+                        yAxisTitle: 'Jaunuzņemto studentu %'
+                        });
+            });
+        });
+    </script>
+</body> 
+</html>

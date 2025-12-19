@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="utils/plot-utils.js"></script>
+  <script src="utils/data.js"></script>
+  <link rel="stylesheet" href="utils/plot-styles.css">
+</head>
+
+<body>
+  <div class="panel-container">
+    <!-- Navigation arrows -->
+    <!-- <div id="prevBtn" class="nav-button">←</div>
+    <div id="nextBtn" class="nav-button">→</div> -->
+
+    <!-- Pane 1 -->
+    <div id="pane1" class="chart-pane active" style="font-family: Arial, sans-serif;">
+      <label for="dataSelect1">Izvēlieties datus, ko attēlot:</label>
+      <select id="dataSelect1"></select>
+      <div id="plot-container1" style="width:100%;height:500px;"></div>
+    </div>
+
+  <script>
+    const LANG = "en";
+
+    document.addEventListener("DOMContentLoaded", () => {
+            const relevantLabels = subsetLabelsByData(
+              applicantsByGroup,
+              LABELS[LANG].groupNames
+                );
+
+            populateSelect("dataSelect1", relevantLabels, "all_applicants");
+
+            makeLinePlot(
+                    "plot-container1", 
+                    applicantsByGroup, 
+                    "home_applicants", 
+                    LABELS[LANG].groupNamesPossessive, 
+                    {
+                      ...TEXTS[LANG],
+                        hoverUnit: 'applicants', 
+                        yAxisTitle: '% of applicants'
+                    });
+
+            document.getElementById("dataSelect1").addEventListener("change", e => {
+                makeLinePlot(
+                        "plot-container1", 
+                        applicantsByGroup, 
+                        e.target.value, 
+                        LABELS[LANG].groupNamesPossessive, 
+                        {
+                           ...TEXTS[LANG],
+                        hoverUnit: 'applicants', 
+                        yAxisTitle: '% of applicants'
+                        });
+            });
+        });
+    </script>
+</body> 
+</html>
