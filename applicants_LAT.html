@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="utils/plot-utils.js"></script>
+  <script src="utils/data.js"></script>
   <link rel="stylesheet" href="utils/plot-styles.css">
 </head>
 
@@ -16,26 +17,43 @@
     <!-- Pane 1 -->
     <div id="pane1" class="chart-pane active" style="font-family: Arial, sans-serif;">
       <label for="dataSelect1">Izvēlieties datus, ko attēlot:</label>
-      <select id="dataSelect1">
-        <option value="all">Pašmāju reflektanti</option>
-      </select>
+      <select id="dataSelect1"></select>
       <div id="plot-container1" style="width:100%;height:500px;"></div>
     </div>
 
   <script>
-    const applicantsByGroup = { // 2022 and 2023 data not correct yet
-    home: { x: [2022, 2023, 2024], y: [81, 80, 77], total: [3042, 3092, 3584], name: "Pašmāju" },
-  };
+    const LANG = "lv";
 
-    const labelMapping = {
-            home: "visu reflektantu",
-        };
+    document.addEventListener("DOMContentLoaded", () => {
+            const relevantLabels = subsetLabelsByData(
+              applicantsByGroup,
+              LABELS[LANG].groupNames
+                );
 
-     document.addEventListener("DOMContentLoaded", () => {
-            makeLinePlot("plot-container1", applicantsByGroup, "home", labelMapping, 'reflektanti', 'Reflektantu %');
+            populateSelect("dataSelect1", relevantLabels, "all_applicants");
+
+            makeLinePlot(
+                    "plot-container1", 
+                    applicantsByGroup, 
+                    "home_applicants", 
+                    LABELS[LANG].groupNamesPossessive, 
+                    {
+                      ...TEXTS[LANG],
+                        hoverUnit: 'reflektanti', 
+                        yAxisTitle: 'Reflektantu %'
+                    });
 
             document.getElementById("dataSelect1").addEventListener("change", e => {
-                makeLinePlot("plot-container1", applicantsByGroup, e.target.value, labelMapping, 'reflektanti', 'Reflektantu %');
+                makeLinePlot(
+                        "plot-container1", 
+                        applicantsByGroup, 
+                        e.target.value, 
+                        LABELS[LANG].groupNamesPossessive, 
+                        {
+                           ...TEXTS[LANG],
+                        hoverUnit: 'reflektanti', 
+                        yAxisTitle: 'Reflektantu %'
+                        });
             });
         });
     </script>
